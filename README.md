@@ -1,6 +1,5 @@
 # sentiment-analysis-tweets
-Twitter Sentiment Analysis on Major Tech Companies
-In this ambitious project, the power of Hadoop's distributed computing was harnessed to analyse vast Big Twitter data related to major tech companies (i.e., Apple, Amazon, Google, Microsoft and Tesla). Our goal was to dive deep into the sentiments of millions of tweets to understand public perception these companies.
+In this project, the power of Hadoop's distributed computing was harnessed to analyse vast Big Twitter data related to major tech companies (i.e., Apple, Amazon, Google, Microsoft and Tesla). Our goal was to dive deep into the sentiments of millions of tweets to understand public perception these companies.
 
 ## Key steps of the project:
 ### Data Ingestion: 
