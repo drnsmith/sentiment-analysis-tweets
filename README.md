@@ -1,6 +1,6 @@
 # sentiment-analysis-tweets
 
-### In this project, the power of Hadoop's distributed computing was harnessed to analyse Big Twitter data related to major tech companies (i.e., Apple, Amazon, Google, Microsoft and Tesla). Our goal was to dive deep into the sentiments of millions of tweets to understand public perception towards these companies.
+* In this project, the power of Hadoop's distributed computing was harnessed to analyse Big Twitter data related to major tech companies (i.e., Apple, Amazon, Google, Microsoft and Tesla). Our goal was to dive deep into the sentiments of millions of tweets to understand public perception towards these companies.
 
 ## Key steps of the project:
 ### Data Ingestion: 
@@ -18,4 +18,4 @@ The processed data were then exported from HDFS to be visualised. This step:
 - Generated plots like word clouds and bar charts depicting sentiment distribution.
 
 ## Final Observations and Implications:
-Utilising the vast potential of Hadoop combined with the precision of TextBlob, we delved into the public's perception of leading tech corporations. This kind of deep dive provides insights that are useful for a variety of audiences, from curious investors to the very companies being discussed. Hadoop's distributed framework ensured smooth processing of our extensive dataset, emphasising the critical role of big data solutions in today's data-intensive era.
+Utilising the vast potential of Hadoop combined with the precision of TextBlob, we delved into the public's perception of leading tech corporations, as a result providing useful insights for a variety of audiences, from curious investors to the very companies being discussed. Hadoop's distributed framework ensured smooth processing of our extensive dataset, emphasising the critical role of big data solutions in today's data-intensive era.
