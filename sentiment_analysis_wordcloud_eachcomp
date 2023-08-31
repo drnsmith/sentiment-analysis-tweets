@@ -1,0 +1,67 @@
+'''This is an alternative code for running sentiment ananlysis and to Create WordCloud to get positive, neutral, and negative sentiments for EACH company'''
+import pandas as pd
+import matplotlib.pyplot as plt
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from textblob import TextBlob
+from wordcloud import WordCloud
+
+# Load the cleaned DataFrame from the CSV file
+cleaned_filename = '/Users/...cleaned_merged_tweets.csv'  
+tweets = pd.read_csv(cleaned_filename)
+
+# Initialize sentiment analyzers
+analyzer = SentimentIntensityAnalyzer()
+
+# Function to get sentiment using VaderSentiment
+def get_vader_sentiment(text):
+    vs = analyzer.polarity_scores(text)
+    if vs['compound'] >= 0.05:
+        return 'Positive'
+    elif -0.05 < vs['compound'] < 0.05:
+        return 'Neutral'
+    else:
+        return 'Negative'
+
+# Function to get sentiment using TextBlob
+def get_textblob_sentiment(text):
+    blob = TextBlob(text)
+    if blob.sentiment.polarity > 0:
+        return 'Positive'
+    elif blob.sentiment.polarity == 0:
+        return 'Neutral'
+    else:
+        return 'Negative'
+
+# Drop rows with missing or NaN values in the 'body' column
+tweets.dropna(subset=['preprocessed_body'], inplace=True)
+
+# Group the DataFrame by 'ticker_symbol'
+grouped = tweets.groupby('ticker_symbol')
+
+# Iterate through each group and analyze sentiments
+for ticker_symbol, group_tweets in grouped:
+    print(f"Sentiment analysis for {ticker_symbol}:")
+    
+    # Apply sentiment analysis to the 'body' column of the group
+    group_tweets['vader_sentiment'] = group_tweets['preprocessed_body'].apply(get_vader_sentiment)
+    group_tweets['textblob_sentiment'] = group_tweets['preprocessed_body'].apply(get_textblob_sentiment)
+    
+    # Display sentiment distribution for Vader
+    print("VADER Sentiment Distribution:")
+    print(group_tweets['vader_sentiment'].value_counts())
+    
+    # Display sentiment distribution for TextBlob
+    print("\nTextBlob Sentiment Distribution:")
+    print(group_tweets['textblob_sentiment'].value_counts())
+
+    # Create WordCloud for positive, neutral, and negative sentiments
+    sentiments = ['Positive', 'Neutral', 'Negative']
+    for sentiment in sentiments:
+        sentiment_text = ' '.join(group_tweets[group_tweets['vader_sentiment'] == sentiment]['body'])
+        wordcloud = WordCloud(width=800, height=400, background_color='white').generate(sentiment_text)
+
+        plt.figure(figsize=(10, 6))
+        plt.imshow(wordcloud, interpolation='bilinear')
+        plt.title(f'WordCloud for {sentiment} Sentiments towards {ticker_symbol}')
+        plt.axis('off')
+        plt.show()
