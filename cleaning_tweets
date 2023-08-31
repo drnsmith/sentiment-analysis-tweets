@@ -17,7 +17,114 @@ class TweetCleaner:
         self.stop_words = set(stopwords.words('english'))
         self.punc_table = str.maketrans("", "", string.punctuation)
 
-    def compound_word_split(self, compound_word):
+    def remove_stop_words(text):
+      
+    # Tokenize the text into individual words
+    words = text.split()
+
+    # Stopwords + other words that don't add value to the analysis
+    allnonwords = stopwords.words('english') + ['would', 'could', 'said', 'also', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+    allnonwords = allnonwords + ['urllink', 'blog', 'date', 'me', 'you', 'she', 'her', 'him', 'they', 'them', 'their', 'your', 'yours', 'our', 'ours']
+    allnonwords = allnonwords + ['right', 'look', 'first', 'last', 'never', 'thought', 'next', 'around', 'ever', 'always', 'come', 'to', 'thing', 'things', 'people']
+    allnonwords = allnonwords + ['many', 'really', 'thing', 'much', 'stuff', 'there', 'hour', 'point', 'mine', 'yours', 'hers',
+                                'his', 'theirs', 'ours', 'issue', 'thing', 'did', 'didnt', 'year', 'maio', 'thing', 'best', 'since', 'month', 'feel']
+    allnonwords = allnonwords + ['much', 'something', 'someone', 'even', 'well', 'still', 'little', 'always', 'never', 'ever', 'sure', 'sort']
+    allnonwords = allnonwords + ['every', 'anything', 'everything', 'nothing', 'everyone', 'everybody', 'everywhere', 'anyone', 'anybody']
+    allnonwords = allnonwords + ['anywhere', 'someone', 'somebody', 'somewhere', 'nowhere', 'thing', 'something', 'nothing', 'everything']
+    allnonwords = allnonwords + ['always', 'another', 'though', 'without', 'actually', 'do', 'dont', 'will', 'wont', 'can', 'cant']
+    allnonwords = allnonwords + ['get', 'got', 'go', 'going', 'know', 'let', 'like', 'make', 'see', 'want', 'come', 'take', 'think']
+    allnonwords = allnonwords + ['back', 'great', 'today', 'year', 'good', 'link', 'night', 'went', 'couple', 'say', 'give', 'need', 'make']
+    allnonwords = allnonwords + ['youre', 'youve', 'youll', 'youd', 'hes', 'shes', 'its', 'were', 'theyre', 'thats', 'week', 'made', 'remember',
+                                 'might', 'getting', 'better', 'real', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaahhhhhhhh', 'news', 'new', 'top',
+                                 'u', 'day', 'brureau', 'love', 'u', 'do', 'not', 'well', 'fuck', 'na', 'haha', 'post', 'there',
+                                 'anyway', 'ask', 'that', 'mean', 'dunno', 'file', 'miss', 'true', 'point', 'call', 'came', 'look',
+                                 'site', 'na', 'talk', 'place', 'need', 'there', 'blog', 'entry', 'originally', 'posted', 'show', 'start',
+                                 'okay', 'lots', 'finally', 'yippee', 'comes', 'hello', 'late', 'wish', 'weblog', 'damit', 'dammit',
+                                 'currently', 'lala', 'opposite', 'told', 'update', 'updating', 'sometimes', 'maybe',
+                                 'easy', 'half', 'different', 'called', 'total', 'took', 'word', 'done', 'stay', 'fine', 'find', 'cannot',
+                                 'front', 'back', 'dude', 'feel', 'name', 'time', 'man', 'woman', 'home', 'ching', 'year',
+                                 'times', 'yeah', 'sorry', 'whole', 'pretty', 'guess', 'nice', 'tomorrow']
+                        
+
+
+    # Remove stop words from the list of words
+    filtered_words = [word for word in words if word not in allnonwords]
+  
+    # Join the filtered words back into a single string
+    filtered_text = ' '.join(filtered_words)
+  
+    return filtered_text
+
+def remove_short_words(text):
+    # Split the text into words
+    words = text.split()
+
+    # Remove words with three letters or less
+    filtered_words = [word for word in words if len(word) > 3]
+
+    # Join the filtered words back into a text
+    filtered_text = ' '.join(filtered_words)
+
+    return filtered_text
+
+def remove_dates(text):
+    # Define regex pattern to match months and days of the week
+    pattern = r'\b(?:january|february|march|april|may|june|july|august|september|october|november|december|monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b'
+
+    # Remove matched dates using regex substitution
+    result = re.sub(pattern, '', text)
+    return result
+
+def remove_tags(text):
+    # Remove HTML tags using regex
+    text = re.sub(r'<.*?>', '', text)
+    text = re.sub(r'<*?>', '', text)
+    return text
+
+def remove_numbers(text):
+    pattern = r'\d+'  # Regular expression pattern to match numbers
+    result = re.sub(pattern, '', text)  # Replace the pattern with empty spaces
+    return result
+
+def remove_punctuation_and_newlines(text):
+    # Remove punctuation
+    text = text.translate(str.maketrans('', '', string.punctuation))
+    # Remove newline characters
+    # text = text.replace('\n', '')
+    return text
+
+def lemmatize_text(text):
+    # Tokenize the text into individual words
+    tokens = word_tokenize(text)
+
+    # Initialize the WordNetLemmatizer
+    lemmatizer = WordNetLemmatizer()
+
+    # Lemmatize each token in the text
+    lemmatized_tokens = [lemmatizer.lemmatize(token) for token in tokens]
+
+    # Join the lemmatized tokens back into a single string
+    lemmatized_text = " ".join(lemmatized_tokens)
+
+    return lemmatized_text
+
+def stem_text(text):
+    # Tokenize the text into words
+    words = word_tokenize(text)
+
+    # Initialize Porter stemmer
+    stemmer = PorterStemmer()
+
+    # Apply stemming to each word
+    stemmed_words = [stemmer.stem(word) for word in words]
+
+    # Join the stemmed words back into a text
+    stemmed_text = ' '.join(stemmed_words)
+
+    return stemmed_text
+
+
+def compound_word_split(self, compound_word):
         matches = re.finditer('.+?(?:(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|$)', compound_word)
         return [m.group(0) for m in matches]
 
