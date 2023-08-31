@@ -1,4 +1,4 @@
-'''This is an alternative code for running sentiment ananlysis and to Create WordCloud for positive, neutral, and negative sentiments '''
+'''This is an alternative code for running sentiment analysis and to Create WordCloud for positive, neutral, and negative sentiments for all companies'''
 
 import pandas as pd
 import matplotlib.pyplot as plt
