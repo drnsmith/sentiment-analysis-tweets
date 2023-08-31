@@ -1,0 +1,61 @@
+'''This is an alternative code for running sentiment ananlysis and to Create WordCloud for positive, neutral, and negative sentiments'''
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from textblob import TextBlob
+from wordcloud import WordCloud
+
+# Load the cleaned DataFrame from the CSV file
+cleaned_filename = '/Users/.../cleaned_merged_tweets.csv'  
+tweets = pd.read_csv(cleaned_filename)
+
+# Initialize sentiment analyzers
+analyzer = SentimentIntensityAnalyzer()
+
+# Function to get sentiment using VaderSentiment
+def get_vader_sentiment(text):
+    vs = analyzer.polarity_scores(text)
+    if vs['compound'] >= 0.05:
+        return 'Positive'
+    elif -0.05 < vs['compound'] < 0.05:
+        return 'Neutral'
+    else:
+        return 'Negative'
+
+# Function to get sentiment using TextBlob
+def get_textblob_sentiment(text):
+    blob = TextBlob(text)
+    if blob.sentiment.polarity > 0:
+        return 'Positive'
+    elif blob.sentiment.polarity == 0:
+        return 'Neutral'
+    else:
+        return 'Negative'
+
+# Drop rows with missing or NaN values in the 'cleaned_text' column
+tweets.dropna(subset=['preprocessed_body'], inplace=True)
+
+# Apply sentiment analysis to the 'cleaned_text' column
+tweets['vader_sentiment'] = tweets['preprocessed_body'].apply(get_vader_sentiment)
+tweets['textblob_sentiment'] = tweets['preprocessed_body'].apply(get_textblob_sentiment)
+
+# Display sentiment distribution
+print("VADER Sentiment Distribution:")
+print(tweets['vader_sentiment'].value_counts())
+
+print("\nTextBlob Sentiment Distribution:")
+print(tweets['textblob_sentiment'].value_counts())
+
+
+# Create WordCloud for positive, neutral, and negative sentiments
+sentiments = ['Positive', 'Neutral', 'Negative']
+for sentiment in sentiments:
+    sentiment_text = ' '.join(tweets[tweets['vader_sentiment'] == sentiment]['preprocessed_body'])
+    wordcloud = WordCloud(width=800, height=400, background_color='white').generate(sentiment_text)
+    
+    plt.figure(figsize=(10, 6))
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.title(f'WordCloud for {sentiment} Sentiments')
+    plt.axis('off')
+    plt.show()
