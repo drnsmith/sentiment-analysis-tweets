@@ -1,0 +1,73 @@
+'''This is the code for cleaning dataset'''
+import nltk
+import re
+import ast
+import csv
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+import pandas as pd
+
+# Downloading stopwords and wordnet from NLTK
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('punkt')
+
+class TweetCleaner:
+    def __init__(self):
+        self.stop_words = set(stopwords.words('english'))
+        self.punc_table = str.maketrans("", "", string.punctuation)
+
+    def compound_word_split(self, compound_word):
+        matches = re.finditer('.+?(?:(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|$)', compound_word)
+        return [m.group(0) for m in matches]
+
+    def remove_non_ascii_chars(self, text):
+        return ''.join([w if ord(w) < 128 else ' ' for w in text])
+
+    def remove_hyperlinks(self,text):
+        return ' '.join([w for w in text.split(' ')  if not 'http' in w])
+
+    def get_cleaned_text(self, text):
+        cleaned_tweet = text.replace('\"','').replace('\'','').replace('-',' ')
+        cleaned_tweet =  self.remove_non_ascii_chars(cleaned_tweet)
+        if re.match(r'RT @[_A-Za-z0-9]+:',cleaned_tweet):
+            cleaned_tweet = cleaned_tweet[cleaned_tweet.index(':')+2:]
+        cleaned_tweet = self.remove_hyperlinks(cleaned_tweet)
+        cleaned_tweet = cleaned_tweet.replace('#','HASHTAGSYMBOL').replace('@','ATSYMBOL')
+        tokens = [w.translate(self.punc_table) for w in word_tokenize(cleaned_tweet)]
+        tokens = [nltk.WordNetLemmatizer().lemmatize(w) for w in tokens if not w.lower() in self.stop_words and len(w)>1]
+        cleaned_tweet = ' '.join(tokens)
+        cleaned_tweet = cleaned_tweet.replace('HASHTAGSYMBOL','#').replace('ATSYMBOL','@')
+        return cleaned_tweet
+
+    def clean_tweets(self, tweets, is_bytes = False):   
+        test_tweet_list = []
+        for tweet in tweets:
+            if is_bytes:
+                test_tweet_list.append(self.get_cleaned_text(ast.literal_eval(tweet).decode("UTF-8")))
+            else:
+                test_tweet_list.append(self.get_cleaned_text(tweet))
+        return test_tweet_list
+    
+    def clean_single_tweet(self, tweet, is_bytes = False):  
+        if is_bytes:
+             return self.get_cleaned_text(ast.literal_eval(tweet).decode("UTF-8"))
+        return self.get_cleaned_text(tweet)
+    
+    def cleaned_file_creator(self, op_file_name, value1, value2):
+        csvFile = open(op_file_name, 'w+')
+        csvWriter = csv.writer(csvFile)
+        for tweet in range(len(value1)):
+            csvWriter.writerow([value1[tweet], value2[tweet]])
+        csvFile.close()
+
+# Instantiate the TweetCleaner
+cleaner = TweetCleaner()
+
+# Clean the tweets in the DataFrame
+tweets['cleaned_body'] = tweets['body'].apply(cleaner.clean_single_tweet)
+
+# Save the cleaned DataFrame to a CSV file
+tweets.to_csv('/Users/.../cleaned_merged_tweets.csv', index=False)
+print(tweets.columns)
+
