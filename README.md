@@ -2,7 +2,8 @@
 
 ## Project Overview
 
-This project aims to conduct Sentiment Analysis (SA) on tweets related to NASDAQ companies. By utilising Big Data analytics tools, we processed a vast volume of Twitter data to gain initial insights into public perception regarding these companies. The sentiments extracted can potentially be correlated with stock market movements in future analyses.
+This project aims to conduct Sentiment Analysis (SA) on tweets related to NASDAQ companies. We processed over 4 mllion Twitter data to gain initial insights into public perception regarding these companies. We show how this can be done more effectively utilising Big Data tools (Mapreduce/Hadoop/AWS). The sentiments extracted can potentially be correlated with stock market movements in future analyses.
+![X] https://raw.githubusercontent.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets/main/X.avif?token=GHSAT0AAAAAACGLJXNVYPBGGXJ6XCF7KCSKZHRGEYA
 
 ## Requirements
 
@@ -38,3 +39,16 @@ This project aims to conduct Sentiment Analysis (SA) on tweets related to NASDAQ
 
 - Remember to use relative paths or environment variables to avoid exposing personal details.
 - If using other Big Data tools or platforms, ensure they are correctly set up and configured.
+
+
+## Contributing
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+Distributed under the MIT License. See `LICENSE` for more information.
