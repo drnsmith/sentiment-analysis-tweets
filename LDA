@@ -1,0 +1,59 @@
+'''This file contains code for running a simple LDA analysis'''
+
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.decomposition import LatentDirichletAllocation
+
+# Load the cleaned dataset
+cleaned_file_path = '/Users/.../cleaned_merged_tweets.csv'
+cleaned_tweets = pd.read_csv(cleaned_file_path)
+
+
+# Vectorize the text data 
+cv = CountVectorizer(max_tweets=0.95, min_tweets=2, stop_words='english')
+dtm = cv.fit_transform(cleaned_tweets['preprocessed_body'])
+
+# Print the vocabulary and document-term matrix
+print("Vocabulary:", cv.get_feature_names())
+print("Document-Term Matrix:")
+print(dtm)
+
+# Check the shape of DTM
+print("Shape of DTM:", dtm.shape)
+
+# Print the first 50 terms in the vocabulary
+print("First 50 terms in vocabulary:", cv.get_feature_names()[:50])
+
+# Convert the DTM to dense format and print the first 5 rows
+dense_dtm = dtm.todense()
+print("First 5 rows of DTM:")
+print(dense_dtm[:5])
+
+# Sum the counts of each word over all documents
+word_counts = dtm.sum(axis=0)
+
+# Convert the word_counts to a list and zip with the feature names
+word_counts_list = word_counts.tolist()[0]
+features = cv.get_feature_names()
+word_counts_dict = dict(zip(features, word_counts_list))
+
+# Get the top 10 words by their counts
+top_words = sorted(word_counts_dict, key=word_counts_dict.get, reverse=True)[:10]
+
+# Print the top words
+for word in top_words:
+    print(word)
+
+
+
+# LDA
+LDA = LatentDirichletAllocation(n_components=10, random_state=42)
+LDA.fit(dtm)
+for index, topic in enumerate(LDA.components_):
+    print(f"THE TOP 15 WORDS FOR TOPIC #{index}")
+    print([cv.get_feature_names()[i] for i in topic.argsort()[-15:]])
+    print("\n")
+
+
+
+
