@@ -1,0 +1,32 @@
+'''This code runs sentiment analysis'''
+import pandas as pd
+from textblob import TextBlob
+
+# Load the AFINN-111 sentiment values into a dictionary (optional, in case you want to compare)
+'''afinn = {}
+with open('AFINN-111.txt', 'r') as f:
+    for line in f:
+        word, score = line.strip().split('\t')
+        afinn[word] = int(score)'''
+
+# Function to classify sentiment using TextBlob
+def classify_sentiment(text):
+    analysis = TextBlob(text)
+    # TextBlob's sentiment.polarity method returns a float in the range [-1,1]
+    # where -1 means negative sentiment, 1 means positive sentiment, and 0 means neutral sentiment.
+    if analysis.sentiment.polarity > 0:
+        return 'positive'
+    elif analysis.sentiment.polarity == 0:
+        return 'neutral'
+    else:
+        return 'negative'
+
+# Read in the CSV file with pandas
+data = pd.read_csv('tweetsClean.csv')
+
+# Create a new column for sentiment
+data['sentiment'] = data['body'].apply(classify_sentiment)
+
+# Save the results
+data[['tweet_id', 'sentiment','ticker_symbol']].to_csv('sentiment_output.csv', index=False)
+
