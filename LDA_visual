@@ -1,0 +1,48 @@
+''' Some basic visualisation after running LDA'''
+# The first visualisation will give an idea if certain topics were trending at particular times, which can be correlated with real-world events.
+import matplotlib.pyplot as plt
+
+# Assuming LDA and dtm are already defined and fitted
+topic_results = LDA.transform(dtm)
+
+# Convert post_date to datetime object
+cleaned_df['post_date'] = pd.to_datetime(cleaned_df['post_date'])
+
+# Create the time_topic_df
+time_topic_df = cleaned_df.groupby([cleaned_df['post_date'].dt.date, 'Topic']).size().unstack().fillna(0)
+
+fig, ax = plt.subplots(figsize=(15, 7))
+
+# Plot each topic's prevalence over time
+for topic in time_topic_df.columns:
+    ax.plot(time_topic_df.index, time_topic_df[topic], label=f"Topic {topic}")
+
+ax.set_title('Topic Prevalence Over Time')
+ax.set_xlabel('Date')
+ax.set_ylabel('Number of Tweets')
+ax.legend()
+
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# The second visualisation can provide insights into the preferences or specialties of the top users in the dataset.
+import numpy as np
+
+top_users = cleaned_df['writer'].value_counts().head(10).index
+user_topic_df_subset = user_topic_df.loc[top_users]
+
+fig, ax = plt.subplots(figsize=(15, 7))
+
+# Create a bar plot for each topic
+for topic in user_topic_df_subset.columns:
+    ax.bar(top_users, user_topic_df_subset[topic], label=f"Topic {topic}")
+
+ax.set_xlabel('User')
+ax.set_ylabel('Number of Tweets')
+ax.set_title('Topic Prevalence Among Top 10 Users')
+ax.legend()
+
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
