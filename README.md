@@ -15,18 +15,18 @@ This project aims to conduct Sentiment Analysis (SA) on tweets related to NASDAQ
 
 ## Steps to Reproduce
 
-1. **Data Collection**: A large volume of tweets pertaining to NASDAQ companies is available on Kaggle.
-2. **Data Cleaning**:
+1. Data Collection: A large volume of tweets pertaining to NASDAQ companies is available on Kaggle.
+2. Data Cleaning:
    - Wrote MapReduce that processes the Twitter data.
    - Removed URLs, user mentions, non-alphanumeric characters, and unnecessary whitespaces.
    - The output from this step serves as input for the next phase.
-3. **Sentiment Analysis**:
+3. Sentiment Analysis:
    - Employed the TextBlob library for sentiment scoring.
    - Processed the cleaned tweets to determine sentiment (positive, neutral, or negative).
    - Utilised the AFINN-111 lexicon for sentiment scoring in the MapReduce job.
-4. **Data Aggregation**: Used MapReduce to aggregate sentiment scores for each NASDAQ company based on the associated ticker symbols in the tweets.
-5. **Visualisation**: Used Python (e.g., libraries such as Matplotlib, Seaborn) for visualisation of the sentiment analysis results. (Note: Though not demonstrated here, tools like Kibana can offer a different perspective and method for visualisation.)
-6. **Results**: The results were saved and can be further analysed to see if any correlation exists between public sentiment and stock market movements.
+4. Data Aggregation: Used MapReduce to aggregate sentiment scores for each NASDAQ company based on the associated ticker symbols in the tweets.
+5. Visualisation: Used Python (e.g., libraries such as Matplotlib, Seaborn) for visualisation of the sentiment analysis results. (Note: Though not demonstrated here, tools like Kibana can offer a different perspective and method for visualisation.)
+6. Results: The results were saved and can be further analysed to see if any correlation exists between public sentiment and stock market movements.
 
 ## How to Run
 
