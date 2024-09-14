@@ -13,6 +13,7 @@ This project conducts **Sentiment Analysis (SA)** on over 4 million tweets relat
 - **TextBlob**: For performing sentiment analysis.
 - **Hadoop/AWS**: Used for large-scale **MapReduce** operations to process vast amounts of Twitter data.
 
+
 ## Tools & Technologies
 
 ### 1. **MapReduce**
@@ -87,6 +88,11 @@ This project conducts **Sentiment Analysis (SA)** on over 4 million tweets relat
 
 - Ensure Hadoop/AWS is properly set up to run the MapReduce jobs.
 - Use environment variables to store sensitive data (API keys, file paths) to avoid exposure in public code.
+
+## Prerequisites
+Python 3.x: Ensure Python is installed.
+Dependencies: Install the required libraries listed in requirements.txt by running the following command:
+pip install -r requirements.txt
 
 ## Contributing
 
