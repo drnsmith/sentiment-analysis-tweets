@@ -3,7 +3,7 @@
 ## Project Overview
 
 This project conducts **Sentiment Analysis (SA)** on over 4 million tweets related to NASDAQ companies. The goal is to gain insights into public perception using **Big Data tools** like **MapReduce**, **Hadoop**, and **AWS** for distributed processing. In future extensions, the sentiment data can be correlated with stock market movements.
-![X]([https://raw.githubusercontent.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets/main/X.png](https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets/blob/main/X.png?raw=true)
+![X](https://github.com/drnsmith/sentiment-analysis-NASDAQ-companies-Tweets/blob/main/X.png?raw=true)
 
 
 ## Requirements
