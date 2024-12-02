@@ -140,6 +140,8 @@ pip install -r requirements.txt
 ### Acknowledgments and Contributing
 
 This project was a collaborative effort between Natasha Smith and Elaheh Bastani. We would like to acknowledge each other’s contribution in designing, implementing, and executing the entire pipeline, from data collection and cleaning to sentiment analysis and visualisation. Our complementary skills made this project a success.
+### Contributors
+Natalya Smith; Patrick Bracebridge; Sanet Shepperson
 Contributions are welcome! If you have ideas or improvements to share, please follow these steps:
 
 1. **Fork the Repository:**
@@ -157,15 +159,15 @@ Write clear and concise commit messages explaining what you’ve done.
 ```bash
 git commit -m "Add YourFeatureName"
 ```
-4. Push Your Changes:
+4. **Push Your Changes**:
 Push your feature branch to your forked repository.
 ```bash
 git push origin feature/YourFeatureName
 ```
-5. Open a Pull Request:
+5. **Open a Pull Request**:
 Submit your changes to the main repository by opening a pull request (PR). Ensure your PR description explains your changes clearly.
 
-6. Review and Feedback:
+6. **Review and Feedback**:
 We will review your PR and may suggest improvements before merging it into the main branch.
 
 Thank you for your interest in contributing!
