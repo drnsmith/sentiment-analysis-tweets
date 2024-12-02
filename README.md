@@ -54,29 +54,29 @@ Optimising indexing and retrieval processes in Elasticsearch for near real-time 
 
 ## Tools & Technologies
 
-### 1. **MapReduce**
+1. **MapReduce**
    - **Role**: MapReduce allows to efficiently distribute the task of cleaning, tokenising, and analysing sentiment across multiple nodes.
    - **Reason**: It is essential when working with large datasets (4 million+ tweets) to ensure scalability.
    
-### 2. **Hadoop**
+2. **Hadoop**
    - **Role**: A distributed file system to store the tweet data and perform MapReduce operations.
    - **Reason**: Hadoop ensures we can store large datasets in a scalable manner and process them efficiently.
 
-### 3. **TextBlob**
+3. **TextBlob**
    - **Role**: Provides sentiment analysis through the processing of cleaned tweets, assigning a sentiment score (positive, neutral, or negative).
    - **Reason**: TextBlob is simple to implement and provides a lexicon-based approach to sentiment analysis.
 
-### 4. **AFINN-111 Lexicon**
+4. **AFINN-111 Lexicon**
    - **Role**: This sentiment lexicon was used in our MapReduce jobs to score tweets based on positive and negative words.
    - **Reason**: AFINN is optimised for short texts like tweets, making it ideal for this project.
 
-### 5. **Matplotlib and Seaborn**
+5. **Matplotlib and Seaborn**
    - **Role**: These Python libraries were used for data visualisation to present the sentiment distribution across different NASDAQ companies.
    - **Reason**: They provide flexible and powerful tools for creating clear, concise visualisations.
    
    _Note_: Tools like **Kibana** can also be used for dynamic, real-time visualisation, though not demonstrated in this version.
 
-## Pipeline: Steps to Reproduce
+#### Pipeline: Steps to Reproduce
 
 1. **Data Collection**: 
     - We used a dataset of NASDAQ-related tweets available on Kaggle.
