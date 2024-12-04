@@ -1,176 +1,147 @@
-### Big Data Sentiment Analysis: Hadoop and NLP for NASDAQ Companies
-As the world becomes more digital, organisations seek insights from large datasets. Social media platforms like Twitter offer a wealth of real-time, user-generated data, making them valuable sources for sentiment and topic analysis. 
-This project conducts **Sentiment Analysis (SA)** on over 4 million tweets related to NASDAQ companies. The goal is to gain insights into public perception using **Big Data tools** like **MapReduce**, **Hadoop**, and **AWS** for distributed processing, with the potential to correlate this data with stock market movements in future extensions.
+### Big Data Sentiment Analysis: Hadoop, Hive, and NLP for NASDAQ Companies
+
+This project leverages Big Data technologies and Natural Language Processing (NLP) to analyse over 4 million tweets related to NASDAQ-listed companies. Using tools like **Hadoop**, **Hive**, and **MapReduce**, combined with sentiment analysis libraries like **TextBlob**, we extract actionable insights into public perception. The results provide a foundation for correlating social media sentiment with financial market trends, offering value to investors, analysts, and businesses.
 
 ---
+
 #### **Motivation**
-Social media platforms like Twitter have become powerful tools for understanding public opinion, making them a valuable resource for sentiment analysis and trend detection. For NASDAQ-listed companies, gauging sentiment can provide critical insights into how the public perceives their performance, products, and reputation.
 
-This project was motivated by the following key factors:
-1. **Real-Time Insights**:  
-   Understanding public sentiment on Twitter can offer real-time feedback on events, campaigns, or announcements, allowing companies and investors to make timely decisions.
-
-2. **Impact on Stock Performance**:  
-   Public sentiment often influences stock prices. This project lays the groundwork for correlating social media data with market movements, enabling better predictive models for stock performance.
-
-3. **Big Data Challenges**:  
-   The immense volume of social media data requires advanced storage and processing solutions. This project demonstrates the use of distributed technologies like **Hadoop** and **MapReduce** to address these challenges.
-
-4. **Practical Applications**:  
-   Insights from sentiment analysis can be used by businesses, investors, and policymakers to:
-   - Understand consumer behaviour.
-   - Evaluate brand reputation.
-   - Monitor industry trends.
-   - Anticipate market shifts.
-
-5. **Extensibility**:  
-   The project serves as a foundational framework for:
-   - Correlating sentiment with stock prices.
-   - Applying advanced NLP techniques like transformer models.
-   - Building real-time dashboards for live sentiment tracking.
+Understanding public sentiment can provide critical insights into brand reputation, customer satisfaction, and even market behavior. For NASDAQ-listed companies, real-time social media data serves as a valuable resource to:
+- **Gauge Public Opinion**: Understand how products, services, or announcements are perceived.
+- **Monitor Brand Reputation**: Track changes in sentiment over time.
+- **Predict Market Trends**: Lay the groundwork for correlating sentiment with stock market performance.
 
 ---
-### Key Takeaways
- - The project demonstrates the power of Big Data tools like Hadoop, Hive, and Elasticsearch for large-scale sentiment and topic analysis.
- - Sentiment scoring and topic modelling provided insights into public opinion and key trends in NASDAQ companies.
- - Visualisation with tools like Matplotlib, Seaborn, and Kibana enabled meaningful exploration of results.
- - By leveraging distributed data technologies, this project showcases a scalable approach to real-time social media analysis with applications across business, politics, and consumer feedback.
 
-#### Challenges Faced
- - **Scalability:**
-Managing high-volume Twitter data required careful scaling using AWS.
- - **Data Quality:**
-Noise and inconsistencies in raw tweet data made cleaning a crucial but time-intensive step.
- - **Real-Time Processing:**
-Optimising indexing and retrieval processes in Elasticsearch for near real-time results.
+## **Features**
 
-## Requirements
+1. **Big Data Processing**:
+   - Utilized **Hadoop** for distributed storage and **Hive** for querying structured datasets at scale.
+   - Designed efficient **MapReduce** jobs for cleaning, tokenizing, and analyzing large datasets.
 
-- **Python**: Core language used for data analysis.
-- **Pandas**: For data manipulation and cleaning.
-- **TextBlob**: For performing sentiment analysis.
-- **Hadoop/AWS**: Used for large-scale **MapReduce** operations to process vast amounts of Twitter data.
+2. **Sentiment Analysis**:
+   - Employed **TextBlob** and **AFINN-111 Lexicon** for sentiment classification (positive, neutral, negative).
+   - Integrated advanced NLP techniques to enhance accuracy.
 
+3. **Dynamic Visualisation**:
+   - Generated meaningful insights through visual tools like **Kibana**, **Matplotlib**, and **Seaborn**.
+   - Explored sentiment trends and their implications on market dynamics.
 
-## Tools & Technologies
+4. **Scalable Pipeline**:
+   - Designed a robust pipeline for real-time data processing and sentiment scoring.
+   - Adaptable for larger datasets and advanced predictive analytics.
 
-1. **MapReduce**
-   - **Role**: MapReduce allows to efficiently distribute the task of cleaning, tokenising, and analysing sentiment across multiple nodes.
-   - **Reason**: It is essential when working with large datasets (4 million+ tweets) to ensure scalability.
-   
-2. **Hadoop**
-   - **Role**: A distributed file system to store the tweet data and perform MapReduce operations.
-   - **Reason**: Hadoop ensures we can store large datasets in a scalable manner and process them efficiently.
+---
 
-3. **TextBlob**
-   - **Role**: Provides sentiment analysis through the processing of cleaned tweets, assigning a sentiment score (positive, neutral, or negative).
-   - **Reason**: TextBlob is simple to implement and provides a lexicon-based approach to sentiment analysis.
+## **Technologies Used**
 
-4. **AFINN-111 Lexicon**
-   - **Role**: This sentiment lexicon was used in our MapReduce jobs to score tweets based on positive and negative words.
-   - **Reason**: AFINN is optimised for short texts like tweets, making it ideal for this project.
+| **Category**      | **Tools & Frameworks**                                     |
+|--------------------|-----------------------------------------------------------|
+| **Big Data**       | Hadoop, Hive, MapReduce, AWS                              |
+| **Programming**    | Python, Java                                              |
+| **NLP**            | TextBlob, NLTK, Vader, AFINN-111 Lexicon                  |
+| **Visualisation**  | Kibana, Matplotlib, Seaborn                               |
+| **Data Handling**  | Pandas, NumPy                                             |
 
-5. **Matplotlib and Seaborn**
-   - **Role**: These Python libraries were used for data visualisation to present the sentiment distribution across different NASDAQ companies.
-   - **Reason**: They provide flexible and powerful tools for creating clear, concise visualisations.
-   
-   _Note_: Tools like **Kibana** can also be used for dynamic, real-time visualisation, though not demonstrated in this version.
+---
 
-#### Pipeline: Steps to Reproduce
+## **Pipeline**
 
-1. **Data Collection**: 
-    - We used a dataset of NASDAQ-related tweets available on Kaggle.
-    - Collected using the Twitter API, with relevant filters applied to gather company-related discussions.
+1. **Data Collection**:
+   - Aggregated tweets from public datasets or APIs using company-related hashtags and mentions.
+   - Stored raw data in a Hadoop Distributed File System (HDFS).
 
 2. **Data Cleaning**:
-    - Implemented **MapReduce** jobs to process the raw Twitter data. 
-    - Removed URLs, user mentions, special characters, and unnecessary whitespaces.
-    - The cleaned data served as input for the sentiment analysis.
+   - Applied **MapReduce** jobs to remove noise (e.g., URLs, special characters).
+   - Structured data for analysis using **Hive**.
 
-3. **Sentiment Analysis**:
-    - We employed the **TextBlob** library to assign sentiment scores (positive, neutral, negative).
-    - For MapReduce operations, the **AFINN-111 lexicon** was used to compute sentiment scores on a large scale.
+3. **Sentiment Scoring**:
+   - Processed tweets with **TextBlob** and **AFINN** to classify sentiments.
+   - Output sentiment scores for each company.
 
-4. **Data Aggregation**:
-    - **MapReduce** was used again to aggregate sentiment scores by NASDAQ company.
-    - The result is an overview of the general public's sentiment toward each company.
+4. **Query and Aggregation**:
+   - Used **Hive** to run queries on structured datasets and extract insights.
+   - Aggregated results to display sentiment trends across companies.
 
 5. **Visualisation**:
-    - Used **Matplotlib** and **Seaborn** for basic visualisations of the sentiment trends.
-    - The visualisations show sentiment distribution and could be further extended with tools like **Kibana**.
+   - Visualised sentiment distributions and trends using **Kibana**, **Matplotlib**, and **Seaborn**.
 
-6. **Results**:
-    - The sentiment results are saved for future analysis.
-    - Next steps could include correlating sentiment with stock prices.
+---
 
-#### How to Run
+## **How to Run**
 
-1. **Setup Environment**:
-    - Ensure all required libraries (listed above) are installed.
-    - Set up environment variables like `CLEANED_TWEETS_PATH` if using relative paths.
+1. **Prerequisites**:
+   - Install Hadoop and Hive on your local system or set up AWS for distributed processing.
+   - Install Python 3.x and required libraries (`requirements.txt`).
 
 2. **Clone the Repository**:
-    ```bash
-    git clone [YOUR REPO URL]
-    ```
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/Big-Data-Sentiment-Analysis
+   cd Big-Data-Sentiment-Analysis
+   ```
 
-3. **Navigate to the Project Directory**:
-    ```bash
-    cd [YOUR REPO NAME]
-    ```
+3. **Set Up Hadoop & Hive**:
+   - Configure HDFS for data storage.
+   - Import cleaned datasets into Hive for querying.
 
-4. **Run the Scripts**:
-    - Follow the steps outlined in the sections above for each phase (data collection, cleaning, sentiment analysis, and visualisation).
+4. **Run Sentiment Analysis**:
+   - Execute MapReduce jobs for data cleaning and sentiment scoring:
+     ```bash
+     hadoop jar sentiment-analysis.jar input_path output_path
+     ```
 
-#### Notes
+5. **Query Results**:
+   - Use Hive to query aggregated sentiment data.
 
-- Ensure Hadoop/AWS is properly set up to run the MapReduce jobs.
-- Use environment variables to store sensitive data (API keys, file paths) to avoid exposure in public code.
+6. **Visualise**:
+   - Generate visualisations with Python scripts.
 
-#### Prerequisites
- - Python 3.x: Ensure Python is installed.
- - Dependencies: Install the required libraries listed in requirements.txt by running the following command:
-```bash
-pip install -r requirements.txt
-```
+---
 
-- Remember to use relative paths or environment variables to avoid exposing personal details.
-- If using other Big Data tools or platforms, ensure they are correctly set up and configured.
+## **Challenges**
 
-### Acknowledgments and Contributing
+1. **Data Quality**:  
+   Cleaning noisy social media data required extensive pre-processing.
+   
+2. **Scalability**:  
+   Managing over 4 million tweets tested the system’s capacity, requiring optimised MapReduce and Hive queries.
+   
+3. **Real-Time Processing**:  
+   Future versions aim to implement real-time sentiment tracking using tools like **Apache Kafka**.
 
-This project was a collaborative effort between Natasha Smith and Elaheh Bastani. We would like to acknowledge each other’s contribution in designing, implementing, and executing the entire pipeline, from data collection and cleaning to sentiment analysis and visualisation. Our complementary skills made this project a success.
-Contributions are welcome! If you have ideas or improvements to share, please follow these steps:
+---
 
-1. **Fork the Repository:**
-Create your own copy of the repository by clicking the "Fork" button at the top right of this page.
+## **Contributing**
 
-2. **Create a Feature Branch:**
-Work on your changes in a dedicated branch.
+Contributions are welcome! If you'd like to improve this project:
+1. Fork the repository.
+2. Create a new branch for your feature:
+   ```bash
+   git checkout -b feature/YourFeatureName
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add YourFeatureName"
+   ```
+4. Push your branch:
+   ```bash
+   git push origin feature/YourFeatureName
+   ```
+5. Open a pull request!
 
-```bash
-git checkout -b feature/YourFeatureName
-```
-3. **Commit Your Changes:**
-Write clear and concise commit messages explaining what you’ve done.
+---
 
-```bash
-git commit -m "Add YourFeatureName"
-```
-4. **Push Your Changes**:
-Push your feature branch to your forked repository.
-```bash
-git push origin feature/YourFeatureName
-```
-5. **Open a Pull Request**:
-Submit your changes to the main repository by opening a pull request (PR). Ensure your PR description explains your changes clearly.
+## **License**
 
-6. **Review and Feedback**:
-We will review your PR and may suggest improvements before merging it into the main branch.
+Distributed under the MIT License. See `LICENSE` for more details.
 
-Thank you for your interest in contributing!
+---
 
-### License
-Distributed under the MIT License. See `LICENSE` for more information.
+### **Acknowledgments**
+
+This project was a collaborative effort led by **Natasha Smith** and **Elaheh Bastani**, leveraging expertise in Big Data, NLP, and data visualization.
+
+For inquiries, connect on [LinkedIn](https://www.linkedin.com/in/YOUR-LINKEDIN).
+
 
 
