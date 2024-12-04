@@ -1,9 +1,9 @@
-## Sentiment Analysis on NASDAQ Companies
+### Big Data Sentiment Analysis: Hadoop and NLP for NASDAQ Companies
 As the world becomes more digital, organisations seek insights from large datasets. Social media platforms like Twitter offer a wealth of real-time, user-generated data, making them valuable sources for sentiment and topic analysis. 
 This project conducts **Sentiment Analysis (SA)** on over 4 million tweets related to NASDAQ companies. The goal is to gain insights into public perception using **Big Data tools** like **MapReduce**, **Hadoop**, and **AWS** for distributed processing, with the potential to correlate this data with stock market movements in future extensions.
 
 ---
-### **Motivation**
+#### **Motivation**
 Social media platforms like Twitter have become powerful tools for understanding public opinion, making them a valuable resource for sentiment analysis and trend detection. For NASDAQ-listed companies, gauging sentiment can provide critical insights into how the public perceives their performance, products, and reputation.
 
 This project was motivated by the following key factors:
